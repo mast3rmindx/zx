@@ -1,0 +1,36 @@
+[package]
+name = "knightdag"
+version = "0.1.0"
+edition = "2021"
+authors = ["Tater <tater@knightdag.org>"]
+description = "A Rust implementation of the KnightDAG protocol with web visualization"
+
+[dependencies]
+# Core dependencies
+tokio = { version = "1.28", features = ["full"] }  # Async runtime
+axum = "0.6"  # Web framework
+tower-http = { version = "0.4", features = ["cors"] }  # HTTP utilities
+serde = { version = "1.0", features = ["derive"] }  # Serialization
+serde_json = "1.0"  # JSON support
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "postgres", "chrono"] }
+deadpool-postgres = "0.10"  # Connection pooling
+tokio-postgres = "0.7"  # PostgreSQL driver
+
+# Logging and metrics
+tracing = "0.1"  # Logging
+tracing-subscriber = "0.3"  # Logging setup
+metrics = "0.20"  # Metrics collection
+metrics-exporter-prometheus = "0.11"  # Prometheus metrics
+
+# Error handling
+thiserror = "1.0"  # Error handling
+anyhow = "1.0"  # Error propagation
+
+# Graph algorithms
+petgraph = "0.6"  # Graph data structures
+rand = "0.8"  # Random number generation
+
+[dev-dependencies]
+tokio-test = "0.4"  # Async testing
