@@ -10,7 +10,7 @@ pub mod frontend;
 pub type NodeId = String;
 
 /// A node in the directed acyclic graph
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct Node {
     /// Unique identifier for the node
     pub id: NodeId,
@@ -21,7 +21,7 @@ pub struct Node {
 }
 
 /// Metadata associated with a node
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct NodeMetadata {
     /// When the node was created
     pub created_at: chrono::DateTime<chrono::Utc>,
@@ -32,7 +32,7 @@ pub struct NodeMetadata {
 }
 
 /// An edge in the directed acyclic graph
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct Edge {
     /// Source node ID
     pub from: NodeId,
@@ -45,7 +45,7 @@ pub struct Edge {
 }
 
 /// Metadata associated with an edge
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct EdgeMetadata {
     /// When the edge was created
     pub created_at: chrono::DateTime<chrono::Utc>,
@@ -59,7 +59,7 @@ pub struct EdgeMetadata {
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error("Database error: {0}")]
-    Database(#[from] sqlx::Error),
+    Database(String), // Changed from ParityDb(#[from] parity_db::Error)
     
     #[error("Node not found: {0}")]
     NodeNotFound(NodeId),
