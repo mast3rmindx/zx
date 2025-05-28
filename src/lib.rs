@@ -59,7 +59,7 @@ pub struct EdgeMetadata {
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error("Database error: {0}")]
-    Database(#[from] sqlx::Error),
+    Database(String),
     
     #[error("Node not found: {0}")]
     NodeNotFound(NodeId),
