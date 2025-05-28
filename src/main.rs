@@ -7,12 +7,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Initialize logging
     tracing_subscriber::fmt::init();
 
-    // Get database URL from environment or use default
-    let database_url = std::env::var("DATABASE_URL")
-        .unwrap_or_else(|_| "postgres://postgres:postgres@localhost/knightdag".to_string());
+    // Get database path from environment or use default
+    let database_path = std::env::var("DATABASE_PATH")
+        .unwrap_or_else(|_| "data/knightdag".to_string());
+
+    // Create database directory if it doesn't exist
+    std::fs::create_dir_all(&database_path)?;
 
     // Create database connection
-    let db = Database::new(&database_url).await?;
+    let db = Database::new(&database_path).await?;
 
     // Create CORS layer
     let cors = CorsLayer::new()
