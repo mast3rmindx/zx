@@ -1,0 +1,12 @@
+[package]
+name = "zx"
+version = "0.1.0"
+edition = "2024"
+description = "A blockchain application using ParityDB"
+authors = ["Tater <tater@example.com>"]
+
+[dependencies]
+parity-db = "0.5.1"
+log = "0.4"
+env_logger = "0.10"
+anyhow = "1.0"
